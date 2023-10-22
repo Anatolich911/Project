@@ -1,0 +1,11 @@
+0.account_setup/configurations.tfvars
+workspace**
+custodian/output
+vault-demo/.terraform.lock.hcl
+vault-demo/.terraform/terraform.tfstate
+vault-demo/.terraform/providers/registry.terraform.io/hashicorp/google/4.61.0/linux_amd64/terraform-provider-google_v4.61.0_x5
+vault-demo/.terraform/providers/registry.terraform.io/hashicorp/random/3.4.3/linux_amd64/terraform-provider-random_v3.4.3_x5
+vault-demo/.terraform/providers/registry.terraform.io/hashicorp/vault/3.14.0/linux_amd64/terraform-provider-vault_v3.14.0_x5
+vault-demo/.terraform/providers/registry.terraform.io/hashicorp/random/3.5.1/linux_amd64/terraform-provider-random_v3.5.1_x5
+vault-demo/.terraform/providers/registry.terraform.io/hashicorp/vault/3.16.0/linux_amd64/terraform-provider-vault_v3.16.0_x5
+bin/*

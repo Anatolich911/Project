@@ -1,0 +1,6 @@
+FROM ubuntu:latest
+RUN apt-get update && \
+    apt-get install -y curl
+RUN curl -Lo /usr/local/bin/ots https://github.com/Luzifer/ots/releases/download/v0.9.0/ots-linux-amd64 && \
+    chmod +x /usr/local/bin/ots
+ENTRYPOINT ["/usr/local/bin/ots"]
