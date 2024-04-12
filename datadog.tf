@@ -16,7 +16,7 @@ datadog:
   site: "${var.datadog-config["site"]}"
   apiKey: "${var.datadog-config["apiKey"]}"
   logs:
-    enabled: true
+    enabled: true 
     containerCollectAll: true
 # clusterAgent:
 #   resources: 
