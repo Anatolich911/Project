@@ -1,0 +1,62 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: example-runnerdeploy
+  namespace: actions-runner-system
+  annotations:
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+  labels:
+    name: example-runnerdeploy
+spec:
+  replicas: 1
+  template:
+    spec:
+      repository: farrukh90/symmetrical-fortnight
+      image: farrukhsadykov/runner:latest
+      labels:
+        - example-runnerdeploy
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: HorizontalRunnerAutoscaler
+metadata:
+  name: example-runnerdeploy
+  namespace: actions-runner-system
+  annotations:
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+  labels:
+    name: example-runnerdeploy
+spec:
+  scaleTargetRef:
+    name: example-runnerdeploy
+  scaleDownDelaySecondsAfterScaleOut: 300
+  minReplicas: 2
+  maxReplicas: 20
+  metrics:
+  - type: TotalNumberOfQueuedAndInProgressWorkflowRuns
+    repositoryNames:
+    - farrukh90/symmetrical-fortnight
+
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: example-runnerdeploy
+  namespace: actions-runner-system
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: example-runnerdeploy
+
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: for-aws-tasks
+parameters:
+  type: pd-standard
+provisioner: kubernetes.io/gce-pd
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+allowVolumeExpansion: false
